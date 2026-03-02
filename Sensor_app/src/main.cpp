@@ -113,7 +113,7 @@ RobotPoseInfo getRobotPoseFromUser(iiwa14& robot) {
 }
 
 void printPoseOnce(const RobotPoseInfo& pose) {
-    cout << "Current Pose:\n";
+    cout << "Current Pose of the tip of the force sensor (NOT robot flange):\n";
     cout << "  Px[m], Py[m], Pz[m] = " << pose.p.transpose() << "\n";
     cout << "  A(Z)[deg] = " << pose.A_deg
          << ", B(Y)[deg] = " << pose.B_deg
@@ -172,7 +172,7 @@ void recordTrialFT(ofstream& file,
 // -----------------------------
 int main() {
     // Robot (FK)
-    auto myLBR = make_unique<iiwa14>(1, "Trey", Eigen::Vector3d(0.0, 0.0, 0.071)); // flange->FT offset
+    auto myLBR = make_unique<iiwa14>(1, "Trey", Eigen::Vector3d(0.0, 0.0, 0.12)); // flange->FT offset
     myLBR->init();
     cout << "Robot Initialized.\n\n";
 
