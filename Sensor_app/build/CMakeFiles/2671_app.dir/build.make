@@ -93,6 +93,7 @@ CMakeFiles/2671_app.dir/main.cpp.s: cmake_force
 2671_app: CMakeFiles/2671_app.dir/main.cpp.o
 2671_app: CMakeFiles/2671_app.dir/build.make
 2671_app: /home/newman_lab/Desktop/FTSensor/lib/libFTSensor.so
+2671_app: /home/newman_lab/Desktop/Explicit-FRI/Libraries/Explicit-cpp/lib/libExplicit-cpp.so
 2671_app: CMakeFiles/2671_app.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/newman_lab/Desktop/Megan-Experiment/Sensor_app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable 2671_app"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/2671_app.dir/link.txt --verbose=$(VERBOSE)

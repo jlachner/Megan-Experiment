@@ -4,7 +4,11 @@ PROJECT(2671_app)
 
 ## Include directories (corrected)
 #set(includeDir "/home/newman_lab/Desktop/Explicit-FRI/Libraries/FTSensor/include")          # Freedom units!
-set(includeDir "/home/newman_lab/Desktop/FTSensor/include")                                  # Metric units!
+set(includeDir 
+    "/home/newman_lab/Desktop/FTSensor/include"                                         # Metric units!
+    "/home/newman_lab/Desktop/Explicit-FRI/Libraries/Explicit-cpp/include"
+    "/home/newman_lab/Desktop/Explicit-FRI/Libraries/Explicit-cpp/Eigen"
+)                                  
 include_directories(${includeDir})
 
 ## Make all source files visible in the IDE
@@ -20,13 +24,21 @@ add_executable(${PROJECT_NAME} ${sourceFiles} ${headerFiles})
 # Correct path to FTSensor library
 #set(SENSOR_LIBRARY_DIR "/home/newman_lab/Desktop/Explicit-FRI/Libraries/FTSensor/lib")          # Freedom units!
 set(SENSOR_LIBRARY_DIR "/home/newman_lab/Desktop/FTSensor/lib")                                  # Metric units!
+set(EXPLICIT_CPP_LIBRARY_DIR "/home/newman_lab/Desktop/Explicit-FRI/Libraries/Explicit-cpp/lib")
+
 set(SENSOR_LIBRARY "${SENSOR_LIBRARY_DIR}/libFTSensor.so")  # Full path to .so file
+set(EXPLICIT_CPP_LIBRARY "${EXPLICIT_CPP_LIBRARY_DIR}/libExplicit-cpp.so")
 
 # Ensure the linker can find the library
-link_directories(${SENSOR_LIBRARY_DIR})
+set(linkLibraries
+${SENSOR_LIBRARY}
+${EXPLICIT_CPP_LIBRARY}
+)
 
-# Link the library to the project
-target_link_libraries(${PROJECT_NAME} ${SENSOR_LIBRARY})
+
+##### SOME PARTS OF THE CODE GO INTO AN ADDITIONAL LIBRARY #####
+
+target_link_libraries(${PROJECT_NAME} ${linkLibraries})
 
 ## Set output directory
 set_target_properties(${PROJECT_NAME}

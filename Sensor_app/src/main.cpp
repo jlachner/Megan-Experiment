@@ -9,12 +9,17 @@
 #include <ctime>
 #include <iomanip>
 #include <sstream>
+#include <memory>
 
 #include "AtiForceTorqueSensor.h"
+#include "exp_robots.h"
 
 using namespace std;
 
-// Get a valid trial number (positive int). Enter 0 to quit.
+// -----------------------------
+// Helpers
+// -----------------------------
+
 int getTrialNumber(const string& prompt) {
     int value;
     while (true) {
@@ -33,11 +38,10 @@ int getTrialNumber(const string& prompt) {
             continue;
         }
 
-        return value; // 0 allowed to quit
+        return value;
     }
 }
 
-// Linux single key press (no Enter)
 char getKeyPress() {
     struct termios oldt, newt;
     char ch;
@@ -53,7 +57,6 @@ char getKeyPress() {
     return ch;
 }
 
-// Timestamp for filenames: YYYYMMDD_HHMMSS
 string getTimestamp() {
     auto now = chrono::system_clock::now();
     time_t t = chrono::system_clock::to_time_t(now);
@@ -66,19 +69,124 @@ string getTimestamp() {
     return oss.str();
 }
 
+// -----------------------------
+// Robot pose bundle
+// -----------------------------
+struct RobotPoseInfo {
+    Eigen::VectorXd q_rad;     // used for FK
+    Eigen::VectorXd q_deg;     // stored for metadata / convenience
+    Eigen::Matrix4d H;
+    Eigen::Vector3d p;
+    Eigen::Matrix3d R;
+    double A_deg;              // Z
+    double B_deg;              // Y
+    double C_deg;              // X
+};
 
-    // ******************************************
-    //TODO: Add function to calculate FK and print robot world coordinates of flange
-    // ******************************************
+// Read joint angles [deg], compute FK + pose + Euler ZYX (A=Z, B=Y, C=X) in degrees.
+RobotPoseInfo getRobotPoseFromUser(iiwa14& robot) {
+    RobotPoseInfo info;
+    info.q_rad = Eigen::VectorXd::Zero(robot.nq);
+    info.q_deg = Eigen::VectorXd::Zero(robot.nq);
+    info.H = Eigen::Matrix4d::Zero();
 
+    const double deg2rad = M_PI / 180.0;
+    const double rad2deg = 180.0 / M_PI;
+
+    for (int i = 0; i < robot.nq; i++) {
+        cout << "Enter joint angle " << i + 1 << " [deg]: ";
+        cin >> info.q_deg(i);
+        info.q_rad(i) = info.q_deg(i) * deg2rad;
+    }
+
+    info.H = robot.getForwardKinematics(info.q_rad);
+    info.p = info.H.block<3, 1>(0, 3);
+    info.R = info.H.block<3, 3>(0, 0);
+
+    // Euler ZYX: [yaw(Z), pitch(Y), roll(X)] -> map to A(Z), B(Y), C(X)
+    Eigen::Vector3d euler_rad = info.R.eulerAngles(2, 1, 0);
+    info.A_deg = euler_rad[0] * rad2deg;
+    info.B_deg = euler_rad[1] * rad2deg;
+    info.C_deg = euler_rad[2] * rad2deg;
+
+    return info;
+}
+
+void printPoseOnce(const RobotPoseInfo& pose) {
+    cout << "Current Pose:\n";
+    cout << "  Px[m], Py[m], Pz[m] = " << pose.p.transpose() << "\n";
+    cout << "  A(Z)[deg] = " << pose.A_deg
+         << ", B(Y)[deg] = " << pose.B_deg
+         << ", C(X)[deg] = " << pose.C_deg << "\n\n";
+}
+
+void writeMetadata(ofstream& file, int trial, const string& ts, const RobotPoseInfo& pose) {
+    file << "# Trial: " << trial << "\n";
+    file << "# Timestamp: " << ts << "\n";
+
+    // Joint angles (deg)
+    file << "# q[deg]=";
+    for (int i = 0; i < pose.q_deg.size(); i++) {
+        file << pose.q_deg(i) << (i + 1 < pose.q_deg.size() ? ", " : "");
+    }
+    file << "\n";
+
+    // Pose (deg)
+    file << "# Px[m]=" << pose.p[0] << ", Py[m]=" << pose.p[1] << ", Pz[m]=" << pose.p[2] << "\n";
+    file << "# A(Z)[deg]=" << pose.A_deg
+         << ", B(Y)[deg]=" << pose.B_deg
+         << ", C(X)[deg]=" << pose.C_deg << "\n";
+}
+
+void recordTrialFT(ofstream& file,
+                   AtiForceTorqueSensor& ftSensor,
+                   const Eigen::Matrix3d& R,
+                   double duration_sec = 7.0,
+                   int sample_ms = 20) {
+
+    file << "Fx [N], Fy [N], Fz [N], Mx [Nm], My [Nm], Mz [Nm]\n";
+
+    auto start = chrono::steady_clock::now();
+    while (chrono::duration<double>(chrono::steady_clock::now() - start).count() < duration_sec) {
+        double* data = ftSensor.Acquire();
+
+        Eigen::Map<const Eigen::Matrix<double, 6, 1>> F_ext_ee(data);
+        Eigen::Matrix<double, 6, 1> F_ext_0;
+
+        F_ext_0.head<3>() = R * F_ext_ee.head<3>();
+        F_ext_0.tail<3>() = R * F_ext_ee.tail<3>();
+
+        for (int i = 0; i < 6; i++) {
+            cout << F_ext_0[i] << " ";
+            file << F_ext_0[i] << (i < 5 ? ", " : "");
+        }
+        cout << endl;
+        file << "\n";
+
+        this_thread::sleep_for(chrono::milliseconds(sample_ms));
+    }
+}
+
+// -----------------------------
+// main
+// -----------------------------
 int main() {
-    // Initialize the force-torque sensor
-    // Check the force-torque sensor via HTML interface at http://172.31.1.1
+    // Robot (FK)
+    auto myLBR = make_unique<iiwa14>(1, "Trey", Eigen::Vector3d(0.0, 0.0, 0.071)); // flange->FT offset
+    myLBR->init();
+    cout << "Robot Initialized.\n\n";
+
+    // FT Sensor
     AtiForceTorqueSensor ftSensor("172.31.1.1");
     cout << "Sensor Activated.\n\n";
 
     const string outDir = "./prints/";
 
+    // Get pose once (q in deg input, internal FK in rad)
+    RobotPoseInfo pose = getRobotPoseFromUser(*myLBR);
+    printPoseOnce(pose);
+
+    // Trial loop
     while (true) {
         int trial = getTrialNumber("Enter Trial Number (0 to quit): ");
         if (trial == 0) {
@@ -91,13 +199,10 @@ int main() {
 
         cout << "Recording data for 7 seconds...\n";
 
-        // Filename: Trial_<trial>_<YYYYMMDD_HHMMSS>.txt
-        string filename = outDir
-                        + "Trial_"
-                        + to_string(trial)
-                        + "_"
-                        + getTimestamp()
-                        + ".txt";
+        // Use one timestamp for BOTH filename and metadata (so they match)
+        string ts = getTimestamp();
+
+        string filename = outDir + "Trial_" + to_string(trial) + "_" + ts + ".txt";
 
         ofstream File_FT(filename);
         if (!File_FT) {
@@ -105,28 +210,8 @@ int main() {
             continue;
         }
 
-        // Column headers (unchanged)
-        File_FT << "Fx [N], Fy [N], Fz [N], Mx [Nm], My [Nm], Mz [Nm]\n";
-
-        // Data acquisition for 7 seconds (unchanged)
-        auto start = chrono::steady_clock::now();
-        while (chrono::duration<double>(chrono::steady_clock::now() - start).count() < 7.0) {
-            double* data = ftSensor.Acquire();
-
-            // ******************************************
-            //TODO: Convert sensor coordinates to robot world coordinates
-            // ******************************************
-
-            // Save and print data (unchanged)
-            for (int i = 0; i < 6; i++) {
-                cout << data[i] << " ";
-                File_FT << data[i] << (i < 5 ? ", " : "");
-            }
-            cout << endl;
-            File_FT << endl;
-
-            this_thread::sleep_for(chrono::milliseconds(20)); // ~50Hz sampling (unchanged)
-        }
+        writeMetadata(File_FT, trial, ts, pose);
+        recordTrialFT(File_FT, ftSensor, pose.R, /*duration_sec=*/7.0, /*sample_ms=*/20);
 
         File_FT.close();
         cout << "Trial " << trial << " completed. Data saved to: " << filename << "\n\n";

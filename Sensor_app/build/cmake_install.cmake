@@ -44,14 +44,18 @@ endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
-   "/usr/local/include/include")
+   "/usr/local/include/include;/usr/local/include/include;/usr/local/include/Eigen")
   if(CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
   if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
-  file(INSTALL DESTINATION "/usr/local/include" TYPE DIRECTORY FILES "/home/newman_lab/Desktop/FTSensor/include" FILES_MATCHING REGEX "/[^/]*\\.h$")
+  file(INSTALL DESTINATION "/usr/local/include" TYPE DIRECTORY FILES
+    "/home/newman_lab/Desktop/FTSensor/include"
+    "/home/newman_lab/Desktop/Explicit-FRI/Libraries/Explicit-cpp/include"
+    "/home/newman_lab/Desktop/Explicit-FRI/Libraries/Explicit-cpp/Eigen"
+    FILES_MATCHING REGEX "/[^/]*\\.h$")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
@@ -74,7 +78,7 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
      NOT IS_SYMLINK "$ENV{DESTDIR}/usr/local/application/2671_app")
     file(RPATH_CHANGE
          FILE "$ENV{DESTDIR}/usr/local/application/2671_app"
-         OLD_RPATH "/home/newman_lab/Desktop/FTSensor/lib:"
+         OLD_RPATH "/home/newman_lab/Desktop/FTSensor/lib:/home/newman_lab/Desktop/Explicit-FRI/Libraries/Explicit-cpp/lib:"
          NEW_RPATH "")
     if(CMAKE_INSTALL_DO_STRIP)
       execute_process(COMMAND "/usr/bin/strip" "$ENV{DESTDIR}/usr/local/application/2671_app")

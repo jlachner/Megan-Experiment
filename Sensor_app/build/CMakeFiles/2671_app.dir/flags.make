@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/newman_lab/Desktop/FTSensor/include
+CXX_INCLUDES = -I/home/newman_lab/Desktop/FTSensor/include -I/home/newman_lab/Desktop/Explicit-FRI/Libraries/Explicit-cpp/include -I/home/newman_lab/Desktop/Explicit-FRI/Libraries/Explicit-cpp/Eigen
 
 CXX_FLAGS = 
 
