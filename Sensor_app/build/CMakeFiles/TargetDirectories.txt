@@ -1,0 +1,7 @@
+/home/newman_lab/Desktop/Megan-Experiment/Sensor_app/build/CMakeFiles/2671_app.dir
+/home/newman_lab/Desktop/Megan-Experiment/Sensor_app/build/CMakeFiles/edit_cache.dir
+/home/newman_lab/Desktop/Megan-Experiment/Sensor_app/build/CMakeFiles/rebuild_cache.dir
+/home/newman_lab/Desktop/Megan-Experiment/Sensor_app/build/CMakeFiles/list_install_components.dir
+/home/newman_lab/Desktop/Megan-Experiment/Sensor_app/build/CMakeFiles/install.dir
+/home/newman_lab/Desktop/Megan-Experiment/Sensor_app/build/CMakeFiles/install/local.dir
+/home/newman_lab/Desktop/Megan-Experiment/Sensor_app/build/CMakeFiles/install/strip.dir

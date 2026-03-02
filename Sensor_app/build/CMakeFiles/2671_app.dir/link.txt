@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/2671_app.dir/main.cpp.o -o 2671_app   -L/home/newman_lab/Desktop/FTSensor/lib  -Wl,-rpath,/home/newman_lab/Desktop/FTSensor/lib: -lFTSensor 
