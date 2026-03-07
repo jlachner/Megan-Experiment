@@ -10,6 +10,8 @@
 #include <iomanip>
 #include <sstream>
 #include <memory>
+#include <stdexcept>
+#include <cmath>
 
 #include "AtiForceTorqueSensor.h"
 #include "exp_robots.h"
@@ -17,31 +19,16 @@
 using namespace std;
 
 // -----------------------------
+// Function declarations
+// -----------------------------
+char getKeyPress();
+int getTrialNumber(const string& prompt);
+int getAngleNumber(const string& prompt);
+string getTimestamp();
+
+// -----------------------------
 // Helpers
 // -----------------------------
-
-int getTrialNumber(const string& prompt) {
-    int value;
-    while (true) {
-        cout << prompt;
-        cin >> value;
-
-        if (cin.fail()) {
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            cout << "Invalid input. Please enter a number.\n";
-            continue;
-        }
-
-        if (value < 0) {
-            cout << "Invalid input. Please enter 0 (quit) or a positive trial number.\n";
-            continue;
-        }
-
-        return value;
-    }
-}
-
 char getKeyPress() {
     struct termios oldt, newt;
     char ch;
@@ -55,6 +42,54 @@ char getKeyPress() {
 
     tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
     return ch;
+}
+
+int getTrialNumber(const string& prompt) {
+    while (true) {
+        cout << prompt;
+
+        string input;
+        cin >> input;
+
+        if (input == "q" || input == "Q") {
+            cout << "Done.\n";
+            exit(0);
+        }
+
+        try {
+            int value = stoi(input);
+
+            if (value < 0) {
+                cout << "Invalid input. Please enter 0 (quit), a positive trial number, or q to quit.\n";
+                continue;
+            }
+
+            return value;
+        } catch (...) {
+            cout << "Invalid input. Please enter a number or q to quit.\n";
+        }
+    }
+}
+
+int getAngleNumber(const string& prompt) {
+    while (true) {
+        cout << prompt;
+
+        string input;
+        cin >> input;
+
+        if (input == "q" || input == "Q") {
+            cout << "Done.\n";
+            exit(0);
+        }
+
+        try {
+            int value = stoi(input);
+            return value;
+        } catch (...) {
+            cout << "Invalid input. Please enter a number or q to quit.\n";
+        }
+    }
 }
 
 string getTimestamp() {
@@ -124,18 +159,23 @@ void writeMetadata(ofstream& file, int trial, const string& ts, const RobotPoseI
     file << "# Trial: " << trial << "\n";
     file << "# Timestamp: " << ts << "\n";
 
-    // Joint angles (deg)
     file << "# q[deg]=";
     for (int i = 0; i < pose.q_deg.size(); i++) {
         file << pose.q_deg(i) << (i + 1 < pose.q_deg.size() ? ", " : "");
     }
     file << "\n";
 
-    // Pose (deg)
     file << "# Px[m]=" << pose.p[0] << ", Py[m]=" << pose.p[1] << ", Pz[m]=" << pose.p[2] << "\n";
     file << "# A(Z)[deg]=" << pose.A_deg
          << ", B(Y)[deg]=" << pose.B_deg
          << ", C(X)[deg]=" << pose.C_deg << "\n";
+}
+
+void writeMetadata2(ofstream& file, int trial, const string& ts, int angle) {
+    file << "# Trial: " << trial << "\n";
+    file << "# Angle[deg]: " << angle << "\n";
+    file << "# Timestamp: " << ts << "\n";
+    file << "\n";
 }
 
 void recordTrialFT(ofstream& file,
@@ -143,7 +183,6 @@ void recordTrialFT(ofstream& file,
                    const Eigen::Matrix3d& R,
                    double duration_sec = 7.0,
                    int sample_ms = 20) {
-
     file << "Fx [N], Fy [N], Fz [N], Mx [Nm], My [Nm], Mz [Nm]\n";
 
     auto start = chrono::steady_clock::now();
@@ -167,6 +206,27 @@ void recordTrialFT(ofstream& file,
     }
 }
 
+void recordTrialFT2(ofstream& file,
+                    AtiForceTorqueSensor& ftSensor,
+                    double duration_sec = 7.0,
+                    int sample_ms = 20) {
+    file << "Fx [N], Fy [N], Fz [N], Mx [Nm], My [Nm], Mz [Nm]\n";
+
+    auto start = chrono::steady_clock::now();
+    while (chrono::duration<double>(chrono::steady_clock::now() - start).count() < duration_sec) {
+        double* data = ftSensor.Acquire();
+
+        for (int i = 0; i < 6; i++) {
+            cout << data[i] << " ";
+            file << data[i] << (i < 5 ? ", " : "");
+        }
+        cout << endl;
+        file << "\n";
+
+        this_thread::sleep_for(chrono::milliseconds(sample_ms));
+    }
+}
+
 // -----------------------------
 // main
 // -----------------------------
@@ -182,13 +242,15 @@ int main() {
 
     const string outDir = "./prints/";
 
-    // Get pose once (q in deg input, internal FK in rad)
-    RobotPoseInfo pose = getRobotPoseFromUser(*myLBR);
-    printPoseOnce(pose);
+    // Optional pose calculation
+    // RobotPoseInfo pose = getRobotPoseFromUser(*myLBR);
+    // printPoseOnce(pose);
 
-    // Trial loop
     while (true) {
-        int trial = getTrialNumber("Enter Trial Number (0 to quit): ");
+
+        int angle = getAngleNumber("Enter Angle (deg) (or q to quit): ");
+
+        int trial = getTrialNumber("Enter Trial Number (0 to quit, q to quit): ");
         if (trial == 0) {
             cout << "Done.\n";
             return 0;
@@ -199,10 +261,8 @@ int main() {
 
         cout << "Recording data for 7 seconds...\n";
 
-        // Use one timestamp for BOTH filename and metadata (so they match)
         string ts = getTimestamp();
-
-        string filename = outDir + "Trial_" + to_string(trial) + "_" + ts + ".txt";
+        string filename = outDir + "Angle_" + to_string(angle) + "_Trial_" + to_string(trial) + "_" + ts + ".txt";
 
         ofstream File_FT(filename);
         if (!File_FT) {
@@ -210,8 +270,8 @@ int main() {
             continue;
         }
 
-        writeMetadata(File_FT, trial, ts, pose);
-        recordTrialFT(File_FT, ftSensor, pose.R, /*duration_sec=*/7.0, /*sample_ms=*/20);
+        writeMetadata2(File_FT, trial, ts, angle);
+        recordTrialFT2(File_FT, ftSensor, 7.0, 20);
 
         File_FT.close();
         cout << "Trial " << trial << " completed. Data saved to: " << filename << "\n\n";

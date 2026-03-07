@@ -250,6 +250,30 @@ CMakeFiles/2671_app.dir/main.cpp.o: /home/newman_lab/Desktop/Megan-Experiment/Se
   /usr/include/c++/11/backward/auto_ptr.h \
   /usr/include/c++/11/pstl/glue_memory_defs.h \
   /usr/include/c++/11/pstl/execution_defs.h \
+  /usr/include/c++/11/cmath \
+  /usr/include/math.h \
+  /usr/include/x86_64-linux-gnu/bits/math-vector.h \
+  /usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h \
+  /usr/include/x86_64-linux-gnu/bits/flt-eval-method.h \
+  /usr/include/x86_64-linux-gnu/bits/fp-logb.h \
+  /usr/include/x86_64-linux-gnu/bits/fp-fast.h \
+  /usr/include/x86_64-linux-gnu/bits/mathcalls-helper-functions.h \
+  /usr/include/x86_64-linux-gnu/bits/mathcalls.h \
+  /usr/include/x86_64-linux-gnu/bits/mathcalls-narrow.h \
+  /usr/include/x86_64-linux-gnu/bits/iscanonical.h \
+  /usr/include/c++/11/bits/specfun.h \
+  /usr/include/c++/11/tr1/gamma.tcc \
+  /usr/include/c++/11/tr1/special_function_util.h \
+  /usr/include/c++/11/tr1/bessel_function.tcc \
+  /usr/include/c++/11/tr1/beta_function.tcc \
+  /usr/include/c++/11/tr1/ell_integral.tcc \
+  /usr/include/c++/11/tr1/exp_integral.tcc \
+  /usr/include/c++/11/tr1/hypergeometric.tcc \
+  /usr/include/c++/11/tr1/legendre_function.tcc \
+  /usr/include/c++/11/tr1/modified_bessel_func.tcc \
+  /usr/include/c++/11/tr1/poly_hermite.tcc \
+  /usr/include/c++/11/tr1/poly_laguerre.tcc \
+  /usr/include/c++/11/tr1/riemann_zeta.tcc \
   /home/newman_lab/Desktop/FTSensor/include/AtiForceTorqueSensor.h \
   /usr/include/arpa/inet.h \
   /usr/include/netinet/in.h \
@@ -285,30 +309,6 @@ CMakeFiles/2671_app.dir/main.cpp.o: /home/newman_lab/Desktop/Megan-Experiment/Se
   /home/newman_lab/Desktop/Explicit-FRI/Libraries/Explicit-cpp/Eigen/Eigen/Core \
   /home/newman_lab/Desktop/Explicit-FRI/Libraries/Explicit-cpp/Eigen/Eigen/src/Core/util/DisableStupidWarnings.h \
   /home/newman_lab/Desktop/Explicit-FRI/Libraries/Explicit-cpp/Eigen/Eigen/src/Core/util/Macros.h \
-  /usr/include/c++/11/cmath \
-  /usr/include/math.h \
-  /usr/include/x86_64-linux-gnu/bits/math-vector.h \
-  /usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h \
-  /usr/include/x86_64-linux-gnu/bits/flt-eval-method.h \
-  /usr/include/x86_64-linux-gnu/bits/fp-logb.h \
-  /usr/include/x86_64-linux-gnu/bits/fp-fast.h \
-  /usr/include/x86_64-linux-gnu/bits/mathcalls-helper-functions.h \
-  /usr/include/x86_64-linux-gnu/bits/mathcalls.h \
-  /usr/include/x86_64-linux-gnu/bits/mathcalls-narrow.h \
-  /usr/include/x86_64-linux-gnu/bits/iscanonical.h \
-  /usr/include/c++/11/bits/specfun.h \
-  /usr/include/c++/11/tr1/gamma.tcc \
-  /usr/include/c++/11/tr1/special_function_util.h \
-  /usr/include/c++/11/tr1/bessel_function.tcc \
-  /usr/include/c++/11/tr1/beta_function.tcc \
-  /usr/include/c++/11/tr1/ell_integral.tcc \
-  /usr/include/c++/11/tr1/exp_integral.tcc \
-  /usr/include/c++/11/tr1/hypergeometric.tcc \
-  /usr/include/c++/11/tr1/legendre_function.tcc \
-  /usr/include/c++/11/tr1/modified_bessel_func.tcc \
-  /usr/include/c++/11/tr1/poly_hermite.tcc \
-  /usr/include/c++/11/tr1/poly_laguerre.tcc \
-  /usr/include/c++/11/tr1/riemann_zeta.tcc \
   /home/newman_lab/Desktop/Explicit-FRI/Libraries/Explicit-cpp/Eigen/Eigen/src/Core/util/ConfigureVectorization.h \
   /usr/lib/gcc/x86_64-linux-gnu/11/include/mmintrin.h \
   /usr/lib/gcc/x86_64-linux-gnu/11/include/emmintrin.h \
@@ -750,50 +750,6 @@ CMakeFiles/2671_app.dir/main.cpp.o: /home/newman_lab/Desktop/Megan-Experiment/Se
 
 /home/newman_lab/Desktop/Explicit-FRI/Libraries/Explicit-cpp/Eigen/Eigen/src/Core/util/ConfigureVectorization.h:
 
-/usr/include/c++/11/tr1/riemann_zeta.tcc:
-
-/usr/include/c++/11/tr1/poly_laguerre.tcc:
-
-/usr/include/c++/11/tr1/poly_hermite.tcc:
-
-/usr/include/c++/11/tr1/modified_bessel_func.tcc:
-
-/home/newman_lab/Desktop/Explicit-FRI/Libraries/Explicit-cpp/Eigen/Eigen/src/Eigenvalues/ComplexSchur.h:
-
-/home/newman_lab/Desktop/Explicit-FRI/Libraries/Explicit-cpp/Eigen/Eigen/src/Geometry/AngleAxis.h:
-
-/home/newman_lab/Desktop/Explicit-FRI/Libraries/Explicit-cpp/Eigen/Eigen/src/Jacobi/Jacobi.h:
-
-/usr/include/c++/11/tr1/hypergeometric.tcc:
-
-/usr/include/c++/11/tr1/exp_integral.tcc:
-
-/home/newman_lab/Desktop/Explicit-FRI/Libraries/Explicit-cpp/Eigen/Eigen/src/Core/util/MKL_support.h:
-
-/usr/include/c++/11/tr1/ell_integral.tcc:
-
-/usr/include/c++/11/tr1/bessel_function.tcc:
-
-/usr/include/c++/11/tr1/special_function_util.h:
-
-/usr/include/c++/11/bits/specfun.h:
-
-/usr/include/x86_64-linux-gnu/bits/iscanonical.h:
-
-/usr/include/x86_64-linux-gnu/bits/mathcalls.h:
-
-/home/newman_lab/Desktop/Explicit-FRI/Libraries/Explicit-cpp/Eigen/Eigen/src/Core/SelfCwiseBinaryOp.h:
-
-/usr/include/x86_64-linux-gnu/bits/mathcalls-helper-functions.h:
-
-/usr/include/x86_64-linux-gnu/bits/fp-logb.h:
-
-/usr/include/x86_64-linux-gnu/bits/flt-eval-method.h:
-
-/home/newman_lab/Desktop/Explicit-FRI/Libraries/Explicit-cpp/Eigen/Eigen/src/plugins/CommonCwiseBinaryOps.h:
-
-/usr/include/x86_64-linux-gnu/bits/math-vector.h:
-
 /home/newman_lab/Desktop/Explicit-FRI/Libraries/Explicit-cpp/Eigen/Eigen/src/SVD/UpperBidiagonalization.h:
 
 /home/newman_lab/Desktop/Explicit-FRI/Libraries/Explicit-cpp/Eigen/Eigen/src/Core/util/Macros.h:
@@ -834,6 +790,56 @@ CMakeFiles/2671_app.dir/main.cpp.o: /home/newman_lab/Desktop/Megan-Experiment/Se
 
 /usr/include/linux/posix_types.h:
 
+/usr/lib/gcc/x86_64-linux-gnu/11/include/mmintrin.h:
+
+/usr/include/x86_64-linux-gnu/bits/sockaddr.h:
+
+/usr/include/x86_64-linux-gnu/bits/socket_type.h:
+
+/usr/include/x86_64-linux-gnu/bits/socket.h:
+
+/home/newman_lab/Desktop/Explicit-FRI/Libraries/Explicit-cpp/Eigen/Eigen/src/Core/arch/Default/GenericPacketMathFunctions.h:
+
+/usr/include/netinet/in.h:
+
+/usr/include/arpa/inet.h:
+
+/home/newman_lab/Desktop/Explicit-FRI/Libraries/Explicit-cpp/Eigen/Eigen/src/misc/Kernel.h:
+
+/home/newman_lab/Desktop/FTSensor/include/AtiForceTorqueSensor.h:
+
+/usr/include/c++/11/tr1/riemann_zeta.tcc:
+
+/usr/include/c++/11/tr1/poly_laguerre.tcc:
+
+/usr/include/c++/11/tr1/poly_hermite.tcc:
+
+/usr/include/c++/11/tr1/modified_bessel_func.tcc:
+
+/home/newman_lab/Desktop/Explicit-FRI/Libraries/Explicit-cpp/Eigen/Eigen/src/Eigenvalues/ComplexSchur.h:
+
+/home/newman_lab/Desktop/Explicit-FRI/Libraries/Explicit-cpp/Eigen/Eigen/src/Geometry/AngleAxis.h:
+
+/home/newman_lab/Desktop/Explicit-FRI/Libraries/Explicit-cpp/Eigen/Eigen/src/Jacobi/Jacobi.h:
+
+/usr/include/c++/11/tr1/hypergeometric.tcc:
+
+/usr/include/c++/11/tr1/exp_integral.tcc:
+
+/home/newman_lab/Desktop/Explicit-FRI/Libraries/Explicit-cpp/Eigen/Eigen/src/Core/util/MKL_support.h:
+
+/usr/include/c++/11/tr1/ell_integral.tcc:
+
+/usr/include/c++/11/tr1/bessel_function.tcc:
+
+/usr/include/c++/11/tr1/special_function_util.h:
+
+/usr/include/c++/11/bits/specfun.h:
+
+/usr/include/x86_64-linux-gnu/bits/iscanonical.h:
+
+/usr/include/x86_64-linux-gnu/bits/mathcalls.h:
+
 /home/newman_lab/Desktop/Explicit-FRI/Libraries/Explicit-cpp/Eigen/Eigen/Householder:
 
 /home/newman_lab/Desktop/Explicit-FRI/Libraries/Explicit-cpp/Eigen/Eigen/Dense:
@@ -847,14 +853,6 @@ CMakeFiles/2671_app.dir/main.cpp.o: /home/newman_lab/Desktop/Megan-Experiment/Se
 /usr/include/x86_64-linux-gnu/asm/bitsperlong.h:
 
 /usr/include/c++/11/backward/binders.h:
-
-/home/newman_lab/Desktop/Explicit-FRI/Libraries/Explicit-cpp/Eigen/Eigen/src/Core/products/GeneralMatrixMatrix.h:
-
-/usr/include/c++/11/bits/node_handle.h:
-
-/usr/include/x86_64-linux-gnu/bits/fp-fast.h:
-
-/usr/include/c++/11/iostream:
 
 /usr/include/x86_64-linux-gnu/c++/11/bits/c++allocator.h:
 
@@ -915,6 +913,8 @@ CMakeFiles/2671_app.dir/main.cpp.o: /home/newman_lab/Desktop/Megan-Experiment/Se
 /home/newman_lab/Desktop/Explicit-FRI/Libraries/Explicit-cpp/Eigen/Eigen/src/Core/MathFunctionsImpl.h:
 
 /usr/include/c++/11/bits/ios_base.h:
+
+/usr/include/x86_64-linux-gnu/bits/fp-logb.h:
 
 /usr/include/x86_64-linux-gnu/bits/endianness.h:
 
@@ -1014,9 +1014,9 @@ CMakeFiles/2671_app.dir/main.cpp.o: /home/newman_lab/Desktop/Megan-Experiment/Se
 
 /usr/include/c++/11/bits/invoke.h:
 
-/usr/include/x86_64-linux-gnu/bits/mathcalls-narrow.h:
-
 /usr/include/x86_64-linux-gnu/bits/in.h:
+
+/usr/include/x86_64-linux-gnu/bits/mathcalls-narrow.h:
 
 /usr/include/c++/11/bits/postypes.h:
 
@@ -1051,6 +1051,14 @@ CMakeFiles/2671_app.dir/main.cpp.o: /home/newman_lab/Desktop/Megan-Experiment/Se
 /usr/include/x86_64-linux-gnu/bits/types/time_t.h:
 
 /home/newman_lab/Desktop/Megan-Experiment/Sensor_app/src/main.cpp:
+
+/usr/include/x86_64-linux-gnu/bits/types/struct_iovec.h:
+
+/usr/include/x86_64-linux-gnu/sys/socket.h:
+
+/usr/include/c++/11/bits/memoryfwd.h:
+
+/usr/include/c++/11/bits/stl_function.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/__fpos_t.h:
 
@@ -1166,8 +1174,6 @@ CMakeFiles/2671_app.dir/main.cpp.o: /home/newman_lab/Desktop/Megan-Experiment/Se
 
 /usr/include/x86_64-linux-gnu/bits/long-double.h:
 
-/usr/include/arpa/inet.h:
-
 /usr/include/x86_64-linux-gnu/bits/types/mbstate_t.h:
 
 /usr/include/c++/11/cwchar:
@@ -1178,27 +1184,11 @@ CMakeFiles/2671_app.dir/main.cpp.o: /home/newman_lab/Desktop/Megan-Experiment/Se
 
 /usr/include/c++/11/bits/stl_algobase.h:
 
-/usr/lib/gcc/x86_64-linux-gnu/11/include/mmintrin.h:
-
-/usr/include/x86_64-linux-gnu/bits/sockaddr.h:
-
 /home/newman_lab/Desktop/Explicit-FRI/Libraries/Explicit-cpp/Eigen/Eigen/src/Core/Fuzzy.h:
 
 /usr/include/c++/11/bits/nested_exception.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/clock_t.h:
-
-/home/newman_lab/Desktop/Explicit-FRI/Libraries/Explicit-cpp/Eigen/Eigen/src/Core/arch/Default/GenericPacketMathFunctions.h:
-
-/usr/include/netinet/in.h:
-
-/usr/include/c++/11/cstring:
-
-/usr/include/math.h:
-
-/usr/include/x86_64-linux-gnu/asm/sockios.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/__FILE.h:
 
 /usr/include/c++/11/bits/std_function.h:
 
@@ -1360,6 +1350,10 @@ CMakeFiles/2671_app.dir/main.cpp.o: /home/newman_lab/Desktop/Megan-Experiment/Se
 
 /usr/include/x86_64-linux-gnu/bits/types/error_t.h:
 
+/home/newman_lab/Desktop/Explicit-FRI/Libraries/Explicit-cpp/Eigen/Eigen/src/Core/SelfCwiseBinaryOp.h:
+
+/usr/include/x86_64-linux-gnu/bits/mathcalls-helper-functions.h:
+
 /usr/include/c++/11/bits/charconv.h:
 
 /home/newman_lab/Desktop/Explicit-FRI/Libraries/Explicit-cpp/Eigen/Eigen/QR:
@@ -1369,6 +1363,14 @@ CMakeFiles/2671_app.dir/main.cpp.o: /home/newman_lab/Desktop/Megan-Experiment/Se
 /usr/include/c++/11/bits/basic_string.tcc:
 
 /usr/include/c++/11/bits/locale_classes.tcc:
+
+/home/newman_lab/Desktop/Explicit-FRI/Libraries/Explicit-cpp/Eigen/Eigen/src/Core/products/GeneralMatrixMatrix.h:
+
+/usr/include/c++/11/bits/node_handle.h:
+
+/usr/include/c++/11/iostream:
+
+/usr/include/x86_64-linux-gnu/bits/fp-fast.h:
 
 /usr/lib/gcc/x86_64-linux-gnu/11/include/mm_malloc.h:
 
@@ -1395,10 +1397,6 @@ CMakeFiles/2671_app.dir/main.cpp.o: /home/newman_lab/Desktop/Megan-Experiment/Se
 /usr/include/c++/11/bits/uniform_int_dist.h:
 
 /usr/include/c++/11/bits/basic_ios.h:
-
-/home/newman_lab/Desktop/Explicit-FRI/Libraries/Explicit-cpp/Eigen/Eigen/src/misc/Kernel.h:
-
-/home/newman_lab/Desktop/FTSensor/include/AtiForceTorqueSensor.h:
 
 /usr/include/c++/11/bits/exception.h:
 
@@ -1500,23 +1498,15 @@ CMakeFiles/2671_app.dir/main.cpp.o: /home/newman_lab/Desktop/Megan-Experiment/Se
 
 /usr/include/x86_64-linux-gnu/bits/termios-c_cflag.h:
 
+/home/newman_lab/Desktop/Explicit-FRI/Libraries/Explicit-cpp/Eigen/Eigen/src/plugins/CommonCwiseBinaryOps.h:
+
+/usr/include/x86_64-linux-gnu/bits/math-vector.h:
+
 /usr/include/x86_64-linux-gnu/bits/termios-c_lflag.h:
 
 /home/newman_lab/Desktop/Explicit-FRI/Libraries/Explicit-cpp/Eigen/Eigen/src/Core/CwiseTernaryOp.h:
 
 /usr/include/x86_64-linux-gnu/bits/termios-misc.h:
-
-/home/newman_lab/Desktop/Explicit-FRI/Libraries/Explicit-cpp/Eigen/Eigen/src/Core/Reverse.h:
-
-/usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h:
-
-/usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h:
-
-/usr/include/c++/11/string_view:
-
-/usr/include/x86_64-linux-gnu/sys/ttydefaults.h:
 
 /usr/include/x86_64-linux-gnu/bits/posix_opt.h:
 
@@ -1560,6 +1550,14 @@ CMakeFiles/2671_app.dir/main.cpp.o: /home/newman_lab/Desktop/Megan-Experiment/Se
 
 /usr/include/c++/11/bits/quoted_string.h:
 
+/usr/include/c++/11/cstring:
+
+/usr/include/x86_64-linux-gnu/asm/sockios.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/__FILE.h:
+
+/usr/include/math.h:
+
 /usr/include/c++/11/sstream:
 
 /home/newman_lab/Desktop/Explicit-FRI/Libraries/Explicit-cpp/Eigen/Eigen/src/SVD/BDCSVD.h:
@@ -1576,14 +1574,16 @@ CMakeFiles/2671_app.dir/main.cpp.o: /home/newman_lab/Desktop/Megan-Experiment/Se
 
 /usr/include/c++/11/bits/stl_raw_storage_iter.h:
 
-/usr/include/c++/11/bits/memoryfwd.h:
+/home/newman_lab/Desktop/Explicit-FRI/Libraries/Explicit-cpp/Eigen/Eigen/src/Core/Reverse.h:
 
-/usr/include/c++/11/bits/stl_function.h:
+/usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h:
 
-/usr/include/x86_64-linux-gnu/sys/socket.h:
+/usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h:
 
-/usr/include/x86_64-linux-gnu/bits/types/struct_iovec.h:
+/usr/include/c++/11/string_view:
 
-/usr/include/x86_64-linux-gnu/bits/socket.h:
+/usr/include/x86_64-linux-gnu/sys/ttydefaults.h:
 
-/usr/include/x86_64-linux-gnu/bits/socket_type.h:
+/usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h:
+
+/usr/include/x86_64-linux-gnu/bits/flt-eval-method.h:
